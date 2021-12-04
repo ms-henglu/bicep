@@ -255,7 +255,7 @@ jobs:
           if-no-files-found: error
 
   build-packages:
-    name: 'Build Packages'
+    name: 'Build Packages (${{ matrix.rid }})'
     runs-on: ${{ matrix.os }}
     needs: build-bicep
 
@@ -268,7 +268,6 @@ jobs:
       
       # should be the full list of RIDs that we support in the CLI
       matrix:
-        os: [ 'windows-latest', 'ubuntu-latest', 'macos-latest' ]
         include:
         - os: 'windows-latest'
           rid: 'win-x64'
