@@ -1,13 +1,13 @@
 ﻿// Custom script extension for a Windows Virtual Machine
 resource virtualMachine 'Microsoft.Compute/virtualMachines@2020-12-01' = {
   name: /*${1:'name'}*/'name'
-  location: location
+  location: /*${2:location}*/'location'
 }
 
-resource /*${2:windowsVMExtensions}*/windowsVMExtensions 'Microsoft.Compute/virtualMachines/extensions@2020-12-01' = {
+resource /*${3:windowsVMExtensions}*/windowsVMExtensions 'Microsoft.Compute/virtualMachines/extensions@2020-12-01' = {
   parent: virtualMachine
-  name: /*${3:'name'}*/'name'
-  location: location
+  name: /*${4:'name'}*/'name'
+  location: /*${2:location}*/'location'
   properties: {
     publisher: 'Microsoft.Compute'
     type: 'CustomScriptExtension'
@@ -15,7 +15,7 @@ resource /*${2:windowsVMExtensions}*/windowsVMExtensions 'Microsoft.Compute/virt
     autoUpgradeMinorVersion: true
     settings: {
       fileUris: [
-        /*${4:'fileUris'}*/'fileUris'
+        /*${5:'fileUris'}*/'fileUris'
       ]
     }
     protectedSettings: {
