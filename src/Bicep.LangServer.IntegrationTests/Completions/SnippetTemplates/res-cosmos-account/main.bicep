@@ -5,10 +5,9 @@
 // $5 = 'Eventual'
 // $6 = 1
 // $7 = 5
-// $8 = 'location'
-// $9 = 0
-// $10 = true
-// $11 = 'EnableTable'
+// $8 = 0
+// $9 = true
+// $10 = 'EnableTable'
 
 param location string
 

@@ -7,7 +7,7 @@ resource /*${1:applicationGatewayFirewall}*/applicationGatewayFirewall 'Microsof
       requestBodyCheck: /*${4|true,false|}*/true
       maxRequestBodySizeInKb: /*${5:'maxRequestBodySizeInKb'}*/'maxRequestBodySizeInKb'
       fileUploadLimitInMb: /*${6:'fileUploadLimitInMb'}*/'fileUploadLimitInMb'
-      state: /*'${6|Enabled,Disabled|}'*/'Enabled'
+      state: /*'${7|Enabled,Disabled|}'*/'Enabled'
       mode: /*'${8|Detection,Prevention|}'*/'Detection'
     }
     managedRules: {

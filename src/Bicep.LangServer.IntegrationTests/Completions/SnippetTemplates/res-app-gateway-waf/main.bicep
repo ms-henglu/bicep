@@ -5,7 +5,7 @@
 // $5 = 128
 // $6 = 100
 // $7 = Enabled
-// $9 = Detection
+// $8 = Detection
 // $9 = 'ruleSetType'
 // $10 = 'ruleSetVersion'
 

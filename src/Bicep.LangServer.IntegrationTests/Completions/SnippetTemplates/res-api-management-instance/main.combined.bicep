@@ -5,7 +5,7 @@
 // $5 = 'Developer'
 // $6 = 'None'
 // $7 = 'publisherEmail@contoso.com'
-// $9 = 'publisherName'
+// $8 = 'publisherName'
 
 param location string
 
