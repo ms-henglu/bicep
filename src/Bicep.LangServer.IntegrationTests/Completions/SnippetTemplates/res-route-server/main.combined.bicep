@@ -1,7 +1,8 @@
 // $1 = 'name'
-// $2 = ipConfiguration
-// $3 = 'name'
-// $4 = 'subnet.id'
+// $2 = location
+// $3 = ipConfiguration
+// $4 = 'name'
+// $5 = 'subnet.id'
 
 param location string
 

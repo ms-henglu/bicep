@@ -1,7 +1,8 @@
 // $1 = virtualWan
 // $2 = 'name'
-// $3 = 'Standard'
-// $4 = 'None'
+// $3 = location
+// $4 = 'Standard'
+// $5 = 'None'
 
 param location string
 

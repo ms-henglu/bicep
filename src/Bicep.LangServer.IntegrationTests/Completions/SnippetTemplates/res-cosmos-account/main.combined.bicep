@@ -1,20 +1,19 @@
 // $1 = cosmosDbAccount
 // $2 = 'name'
-// $3 = 'GlobalDocumentDB'
-// $4 = 'Eventual'
-// $5 = 1
-// $6 = 5
-// $7 = 'location'
+// $3 = location
+// $4 = 'GlobalDocumentDB'
+// $5 = 'Eventual'
+// $6 = 1
+// $7 = 5
 // $8 = 0
 // $9 = true
 // $10 = 'EnableTable'
 
 param location string
-//@[6:14) [no-unused-params (Warning)] Parameter "location" is declared but never used. (CodeDescription: bicep core(https://aka.ms/bicep/linter/no-unused-params)) |location|
 
 resource cosmosDbAccount 'Microsoft.DocumentDB/databaseAccounts@2021-03-15' = {
   name: 'name'
-  location: 'location'
+  location: location
   kind: 'GlobalDocumentDB'
   properties: {
     consistencyPolicy: {
@@ -24,7 +23,7 @@ resource cosmosDbAccount 'Microsoft.DocumentDB/databaseAccounts@2021-03-15' = {
     }
     locations: [
       {
-        locationName: 'location'
+        locationName: location
         failoverPriority: 0
       }
     ]

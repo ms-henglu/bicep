@@ -1,7 +1,8 @@
 // $1 = webApplication
 // $2 = 'name'
-// $3 = appServicePlan
-// $4 = 'webServerFarms.id'
+// $3 = location
+// $4 = appServicePlan
+// $5 = 'webServerFarms.id'
 
 param location string
 
@@ -14,5 +15,6 @@ resource webApplication 'Microsoft.Web/sites@2018-11-01' = {
   properties: {
     serverFarmId: 'webServerFarms.id'
   }
-}// Insert snippet here
+}
+// Insert snippet here
 
