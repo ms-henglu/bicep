@@ -26,14 +26,14 @@
 // $27 = 'https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#'
 // $28 = '1.0.0.0'
 // $29 = parameterName
-// $40 = 'String'
-// $40 = 'displayName'
-// $41 = 'description'
-// $42 = 'name'
-// $43 = 'type'
-// $44 = 'apiVersion'
-// $45 = parameterName
-// $46 = 'value'
+// $30 = 'String'
+// $31 = 'displayName'
+// $32 = 'description'
+// $33 = 'name'
+// $34 = 'type'
+// $35 = 'apiVersion'
+// $36 = parameterName
+// $37 = 'value'
 
 targetScope = 'subscription'
 
