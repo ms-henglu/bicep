@@ -1,6 +1,7 @@
 ﻿// $1 = publicIPAddress
 // $2 = 'name'
-// $3 = 'dnsName'
+// $3 = location
+// $4 = 'dnsName'
 
 param location string
 

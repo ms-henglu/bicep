@@ -6,6 +6,4 @@
 // $6 = 'administratorLogin'
 // $7 = 'administratorLoginPassword'
 
-param location string
-
 // Insert snippet here

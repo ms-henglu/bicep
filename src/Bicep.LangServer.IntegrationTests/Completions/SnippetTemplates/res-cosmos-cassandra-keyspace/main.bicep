@@ -3,6 +3,4 @@
 // $3 = 'id'
 // $4 = 1000
 
-param location string
-
 // Insert snippet here

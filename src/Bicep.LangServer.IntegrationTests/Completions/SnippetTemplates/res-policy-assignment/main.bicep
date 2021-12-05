@@ -1,6 +1,6 @@
 ﻿// $1 = policyAssignment
 // $2 = 'name'
-// $3 = 'location'
+// $3 = location
 // $4 = 'SystemAssigned'
 // $5 = 'displayName'
 // $6 = 'description'

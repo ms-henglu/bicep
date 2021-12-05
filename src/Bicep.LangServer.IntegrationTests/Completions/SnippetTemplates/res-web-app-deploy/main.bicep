@@ -1,8 +1,9 @@
 ﻿// $1 = 'name'
-// $2 = webApplicationExtension
-// $3 = 'packageUri'
-// $4 = 'connectionString'
-// $5 = 'name'
+// $2 = location
+// $3 = webApplicationExtension
+// $4 = 'packageUri'
+// $5 = 'connectionString'
+// $6 = 'name'
 
 param location string
 

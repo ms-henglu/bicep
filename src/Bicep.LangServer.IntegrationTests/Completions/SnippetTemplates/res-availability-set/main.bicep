@@ -1,5 +1,6 @@
 ﻿// $1 = availabilitySet
 // $2 = 'name'
+// $3 = location
 
 param location string
 
