@@ -28,6 +28,11 @@ namespace Bicep2Terraform.HclExtension
             return sb.ToString();
         }
 
+        public static string ToHcl(this BinaryOperationSyntax syntax, string indent = "")
+        {
+            return String.Format("{0} {1} {2}", syntax.LeftExpression.ToHcl(), syntax.OperatorToken.ToText(), syntax.RightExpression.ToHcl());
+        }
+
         public static string ToHcl(this BooleanLiteralSyntax syntax, string indent = "")
         {
             return syntax.ToText();
@@ -49,7 +54,7 @@ namespace Bicep2Terraform.HclExtension
                     }
                     break;
                 case "any":
-                    Console.WriteLine("[WARN] Bicep any func is used to convert parameter to correct type, ignore it for now.");
+                    // Bicep any func is used to convert parameter to correct type, ignore it for now.
                     if (AssertFunctionArgumentsLength(syntax, 1))
                     {
                         return syntax.Arguments[0].ToHcl(indent);
@@ -82,23 +87,27 @@ namespace Bicep2Terraform.HclExtension
                     return "data.azurerm_client_config.current";
                 case "resourceId":
                     string sub = "", rg = "", type = "";
+                    int offset = 0;
                     if (syntax.Arguments.Length > 0 && syntax.Arguments[0].Expression is StringSyntax && syntax.Arguments[0].ToHcl().Contains("."))
                     {
                         sub = "data.azurerm_client_config.current.subscription_id";
                         rg = "azurerm_resource_group.test.name";
                         type = syntax.Arguments[1].ToHcl().Replace("\"", "");
+                        offset = 0;
                     }
                     else if (syntax.Arguments.Length > 1 && syntax.Arguments[1].Expression is StringSyntax && syntax.Arguments[1].ToHcl().Contains("."))
                     {
                         sub = "data.azurerm_client_config.current.subscription_id";
                         rg = syntax.Arguments[0].ToHcl();
                         type = syntax.Arguments[1].ToHcl().Replace("\"", "");
+                        offset = 1;
                     }
                     else if (syntax.Arguments.Length > 2 && syntax.Arguments[2].Expression is StringSyntax && syntax.Arguments[2].ToHcl().Contains("."))
                     {
                         sub = syntax.Arguments[0].ToHcl();
                         rg = syntax.Arguments[1].ToHcl();
                         type = syntax.Arguments[2].ToHcl().Replace("\"", "");
+                        offset = 2;
                     }
 
                     if (type == "")
@@ -111,9 +120,9 @@ namespace Bicep2Terraform.HclExtension
                     for (int i = 1; i < parts.Length; i++)
                     {
                         var value = "";
-                        if (i + 2 < syntax.Arguments.Length)
+                        if (i + offset < syntax.Arguments.Length)
                         {
-                            value = syntax.Arguments[i + 2].ToHcl();
+                            value = syntax.Arguments[i + offset].ToHcl();
                         } else
                         {
                             break;
@@ -212,6 +221,7 @@ namespace Bicep2Terraform.HclExtension
                 var identityProp = syntax.Properties.FirstOrDefault(x => x.TryGetKeyText() == "identity");
                 var tagsProp = syntax.Properties.FirstOrDefault(x => x.TryGetKeyText() == "tags");
                 var parentProp = syntax.Properties.FirstOrDefault(x => x.TryGetKeyText() == "parent");
+                var scopeProp = syntax.Properties.FirstOrDefault(x => x.TryGetKeyText() == "scope");
                 if (locationProp != null)
                 {
                     sb.AppendFormat("{0}location = {1}\n", indent, locationProp.Value.ToHcl());
@@ -229,6 +239,7 @@ namespace Bicep2Terraform.HclExtension
                 props.Remove(identityProp);
                 props.Remove(tagsProp);
                 props.Remove(parentProp);
+                props.Remove(scopeProp);
 
                 if (!props.IsNullOrEmpty())
                 {
@@ -322,7 +333,7 @@ namespace Bicep2Terraform.HclExtension
             sb.Append(syntax.SegmentValues[0]);
             for (int i = 0; i < syntax.Expressions.Length; i++)
             {
-                sb.AppendFormat("${{{0}}}{1}", syntax.Expressions[0].ToHcl(), syntax.SegmentValues[i + 1]);
+                sb.AppendFormat("${{{0}}}{1}", syntax.Expressions[i].ToHcl(), syntax.SegmentValues[i + 1]);
             }
             sb.Append("\"");
             return sb.ToString();
@@ -336,10 +347,10 @@ namespace Bicep2Terraform.HclExtension
         public static string ToHcl(this VariableAccessSyntax syntax, string indent = "")
         {
             var key = syntax.Name.ToText();
-          //  if (localScopeVarMap.ContainsKey(key))
-            //{
-              //  return localScopeVarMap[key];
-            //}
+            if (localScopeVarMap.ContainsKey(key))
+            {
+                return localScopeVarMap[key];
+            }
             if (predefinedMap.ContainsKey(key))
             {
                 return predefinedMap[key];

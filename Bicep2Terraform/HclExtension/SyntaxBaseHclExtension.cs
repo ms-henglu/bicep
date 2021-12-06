@@ -124,6 +124,9 @@ namespace Bicep2Terraform.HclExtension
                 case ArraySyntax:
                     return ((ArraySyntax)syntax).ToHcl(indent);
 
+                case BinaryOperationSyntax:
+                    return ((BinaryOperationSyntax)syntax).ToHcl(indent);
+
                 case BooleanLiteralSyntax:
                     return ((BooleanLiteralSyntax)syntax).ToHcl(indent);
 

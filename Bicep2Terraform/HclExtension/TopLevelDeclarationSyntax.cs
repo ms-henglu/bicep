@@ -16,10 +16,9 @@ namespace Bicep2Terraform.HclExtension
             {
                 var defaultValue = ((ParameterDefaultValueSyntax)syntax.Modifier).ToHcl();
                 if (defaultValue.StartsWith("azurerm_resource_group.test") || defaultValue.StartsWith("data.azurerm_client_config.current"))
-                {
-                    Console.WriteLine("[INFO] Variables not allowed as default input value. All usage of ${0} will be replaced with ${1}", syntax.Name.ToText(), defaultValue);
+                {                    
                     predefinedMap[syntax.Name.ToText()] = defaultValue;
-                    return "";
+                    return String.Format("//[INFO] Variables not allowed as default input value. All usage of `{0}` will be replaced with `{1}`\n", syntax.Name.ToText(), defaultValue);
                 }
             }
 
@@ -33,7 +32,7 @@ namespace Bicep2Terraform.HclExtension
                     case ParameterDefaultValueSyntax:
                         var defaultValue = ((ParameterDefaultValueSyntax)syntax.Modifier).ToHcl();
                         if (defaultValue.Contains("var.")) {
-                            Console.WriteLine("[WARN]  Variables not allowed as default input value. default value: {0}", defaultValue);
+                            sb.AppendFormat("//[WARN]  Variables not allowed as default input value. default value: {0}\n", defaultValue);
                         }
                         else
                         {
@@ -117,8 +116,12 @@ namespace Bicep2Terraform.HclExtension
                         }
                         break;
                     case ForSyntax:
-                        sb.AppendFormat("{0}body        = jsonencode({{}})\n", indent + INDENT_UNIT);                        
-                        Console.WriteLine("[WARN] Bicep for-loop accepts an array but this is not supported in terraform. Details: {0}", body.ToText());
+                        var forSyntax = (ForSyntax)body;
+                        localScopeVarMap.Clear();
+                        localScopeVarMap.Add(forSyntax.ItemVariable.ToText(), "each.value");
+                        sb.Append(((ObjectSyntax)(forSyntax.Body)).ToHcl(indent + INDENT_UNIT, true));
+                        sb.AppendFormat("{0}for_each = {{ for i, v in {1} : \"item${{i}}\" => v }}\n", indent + INDENT_UNIT, forSyntax.Expression.ToHcl());
+                        localScopeVarMap.Clear();
                         break;
                     default:
                         body.ToHcl(indent + INDENT_UNIT);
@@ -154,7 +157,7 @@ namespace Bicep2Terraform.HclExtension
                     if (forSyntax.Body is ObjectSyntax)
                     {
                         localScopeVarMap.Clear();
-                        localScopeVarMap.Add(forSyntax.ItemVariable.ToText(), "each");
+                        localScopeVarMap.Add(forSyntax.ItemVariable.ToText(), "each.value");
                         objSyntax = (ObjectSyntax)forSyntax.Body;
                     }
                     break;
@@ -166,14 +169,21 @@ namespace Bicep2Terraform.HclExtension
 
             var parentProp = objSyntax.Properties.FirstOrDefault(x => x.TryGetKeyText() == "parent");
             var nameProp = objSyntax.Properties.FirstOrDefault(x => x.TryGetKeyText() == "name");
-            var name = nameProp != null ? nameProp.Value.ToHcl() : "default";
+            var scopeProp = objSyntax.Properties.FirstOrDefault(x => x.TryGetKeyText() == "scope");
+            var name = nameProp != null ? nameProp.Value.ToHcl() : "\"default\"";
             if (parentProp != null)
             {
                 var lastType = resourceType.Substring(resourceType.LastIndexOf("/") + 1);
 
                 var parent = parentProp.Value.ToHcl();
                 var parentId = parent + (parent.Contains("azurerm-restapi") ? ".resource_id" : ".id");
-                return String.Format("\"${{{0}}}/{1}/{2}\"", parentId, lastType, name);
+                return String.Format("\"${{{0}}}/{1}/${{{2}}}\"", parentId, lastType, name);
+            }
+            if (scopeProp != null)
+            {
+                var scope = scopeProp.Value.ToHcl();
+                var scopeId = scope + (scope.Contains("azurerm-restapi") ? ".resource_id" : ".id");
+                return String.Format("\"${{{0}}}/{1}/${{{2}}}\"", scopeId, resourceType, name);
             }
             localScopeVarMap.Clear();
             return String.Format("\"${{azurerm_resource_group.test.id}}/providers/{0}/${{{1}}}\"", resourceType, name);
