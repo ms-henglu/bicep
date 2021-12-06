@@ -117,7 +117,7 @@ namespace Bicep2Terraform.HclExtension
                         }
                         break;
                     case ForSyntax:
-                        sb.AppendFormat("{0}body        = jsonencode({{}})\n", indent + INDENT_UNIT);
+                        sb.AppendFormat("{0}body        = jsonencode({{}})\n", indent + INDENT_UNIT);                        
                         Console.WriteLine("[WARN] Bicep for-loop accepts an array but this is not supported in terraform. Details: {0}", body.ToText());
                         break;
                     default:
@@ -153,6 +153,8 @@ namespace Bicep2Terraform.HclExtension
                     var forSyntax = (ForSyntax)body;
                     if (forSyntax.Body is ObjectSyntax)
                     {
+                        localScopeVarMap.Clear();
+                        localScopeVarMap.Add(forSyntax.ItemVariable.ToText(), "each");
                         objSyntax = (ObjectSyntax)forSyntax.Body;
                     }
                     break;
@@ -173,7 +175,7 @@ namespace Bicep2Terraform.HclExtension
                 var parentId = parent + (parent.Contains("azurerm-restapi") ? ".resource_id" : ".id");
                 return String.Format("\"${{{0}}}/{1}/{2}\"", parentId, lastType, name);
             }
-
+            localScopeVarMap.Clear();
             return String.Format("\"${{azurerm_resource_group.test.id}}/providers/{0}/${{{1}}}\"", resourceType, name);
         }
 

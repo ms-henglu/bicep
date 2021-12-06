@@ -211,7 +211,7 @@ namespace Bicep2Terraform.HclExtension
                 var locationProp = syntax.Properties.FirstOrDefault(x => x.TryGetKeyText() == "location");
                 var identityProp = syntax.Properties.FirstOrDefault(x => x.TryGetKeyText() == "identity");
                 var tagsProp = syntax.Properties.FirstOrDefault(x => x.TryGetKeyText() == "tags");
-
+                var parentProp = syntax.Properties.FirstOrDefault(x => x.TryGetKeyText() == "parent");
                 if (locationProp != null)
                 {
                     sb.AppendFormat("{0}location = {1}\n", indent, locationProp.Value.ToHcl());
@@ -228,6 +228,7 @@ namespace Bicep2Terraform.HclExtension
                 props.Remove(locationProp);
                 props.Remove(identityProp);
                 props.Remove(tagsProp);
+                props.Remove(parentProp);
 
                 if (!props.IsNullOrEmpty())
                 {
@@ -335,6 +336,10 @@ namespace Bicep2Terraform.HclExtension
         public static string ToHcl(this VariableAccessSyntax syntax, string indent = "")
         {
             var key = syntax.Name.ToText();
+          //  if (localScopeVarMap.ContainsKey(key))
+            //{
+              //  return localScopeVarMap[key];
+            //}
             if (predefinedMap.ContainsKey(key))
             {
                 return predefinedMap[key];

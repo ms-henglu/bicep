@@ -20,11 +20,30 @@ namespace Bicep2Terraform.HclExtension
     {
         public static string INDENT_UNIT = "  ";
 
+        /// <summary>
+        /// Set of locals
+        /// </summary>
         private static HashSet<String> localsMap = new HashSet<string>();
+
+        /// <summary>
+        /// Mapping from label to resource type, ex: test -> data.azurerm-restapi_resource
+        /// </summary>
         private static Dictionary<String, String> resourceMap = new Dictionary<string, string>();
+
+        /// <summary>
+        /// Mapping some bicep inputs which replaced with azurerm_resource_group and azurerm_client_config, ex: location -> azurerm_resource_group.test.location
+        /// </summary>
         private static Dictionary<String, String> predefinedMap = new Dictionary<string, string>();
+
+        /// <summary>
+        /// Mapping from resource type.label to output properties, ex: data.azurerm-restapi_resource -> properties.publicNetworkAccess, name
+        /// </summary>
         private static List<Tuple<String, HashSet<String>>> resourceOutputList = new List<Tuple<string, HashSet<string>>>();
 
+        /// <summary>
+        /// Used to replace bicep for loop interator item with hcl for_each interator
+        /// </summary>
+        private static Dictionary<String, String> localScopeVarMap = new Dictionary<string, string>();
         public static void SetupContext(this ProgramSyntax syntax)
         {
             localsMap = new HashSet<string>();
