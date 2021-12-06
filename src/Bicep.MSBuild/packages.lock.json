@@ -4,20 +4,20 @@
     ".NETStandard,Version=v2.0": {
       "Microsoft.Build.Framework": {
         "type": "Direct",
-        "requested": "[16.10.0, )",
-        "resolved": "16.10.0",
-        "contentHash": "uD2GUw3AYlFSpU42c/80DouuJL6w1Kb06q4FEjQhW/9wjhBwukgx13T5MPIpSvQ8ssahKINanHfMUL89EVQHgQ==",
+        "requested": "[17.0.0, )",
+        "resolved": "17.0.0",
+        "contentHash": "XbFA0z+6Ws2pNeRXYcDF3lKlNgRoSGMm2Q5HKzZD+EbwYMKPKrl/BJnnkMuDJHU0KravYHfhzBnLLJpPeZ3E7A==",
         "dependencies": {
           "System.Security.Permissions": "4.7.0"
         }
       },
       "Microsoft.Build.Utilities.Core": {
         "type": "Direct",
-        "requested": "[16.10.0, )",
-        "resolved": "16.10.0",
-        "contentHash": "R8eATgdaGCfdepd67LMe1qhJz6iQOTuI9gVoOqXrHwhc77sBDqG0XD9zKvrgOqfS6NJ03KKTAhbbXnLgD5fKCA==",
+        "requested": "[17.0.0, )",
+        "resolved": "17.0.0",
+        "contentHash": "+eqDvecetKfsZR9WqLQ96F9xhxFb3m9VOjkyzuaA/2D1cub1aW9XyegZb8+gEpBa+o7dHnIN9FskC+tRXtqLSQ==",
         "dependencies": {
-          "Microsoft.Build.Framework": "16.10.0",
+          "Microsoft.Build.Framework": "17.0.0",
           "Microsoft.NET.StringTools": "1.0.0",
           "Microsoft.Win32.Registry": "4.3.0",
           "System.Collections.Immutable": "5.0.0",
@@ -34,9 +34,9 @@
       },
       "Nerdbank.GitVersioning": {
         "type": "Direct",
-        "requested": "[3.4.231, )",
-        "resolved": "3.4.231",
-        "contentHash": "ifpSbv0sySgIVymTQQz0pjI6O7o/JxnIQMlj28JF5Ybr1LoUTcMfoKnAKwteRlhpQM9qJmONGy9M8BgrEcOteg=="
+        "requested": "[3.4.244, )",
+        "resolved": "3.4.244",
+        "contentHash": "L+xHZiYgIvMEbHo1X49HxgfUhfh52/TWLOuUDsOP3OAY0QAn+W6SRNA5bvIRBQ4291SlTZUXPbCRPX8bn7H86Q=="
       },
       "NETStandard.Library": {
         "type": "Direct",

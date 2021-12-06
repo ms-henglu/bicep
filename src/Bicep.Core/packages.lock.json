@@ -89,9 +89,9 @@
       },
       "JetBrains.Annotations": {
         "type": "Direct",
-        "requested": "[2021.2.0, )",
-        "resolved": "2021.2.0",
-        "contentHash": "kKSyoVfndMriKHLfYGmr0uzQuI4jcc3TKGyww7buJFCYeHb/X0kodYBPL7n9454q7v6ASiRmDgpPGaDGerg/Hg=="
+        "requested": "[2021.3.0, )",
+        "resolved": "2021.3.0",
+        "contentHash": "Ddxjs5RRjf+c8m9m++WvhW1lz1bqNhsTjWvCLbQN9bvKbkJeR9MhtfNwKgBRRdG2yLHcXFr5Lf7fsvvkiPaDRg=="
       },
       "Microsoft.CodeAnalysis.BannedApiAnalyzers": {
         "type": "Direct",
@@ -133,9 +133,9 @@
       },
       "Nerdbank.GitVersioning": {
         "type": "Direct",
-        "requested": "[3.4.231, )",
-        "resolved": "3.4.231",
-        "contentHash": "ifpSbv0sySgIVymTQQz0pjI6O7o/JxnIQMlj28JF5Ybr1LoUTcMfoKnAKwteRlhpQM9qJmONGy9M8BgrEcOteg=="
+        "requested": "[3.4.244, )",
+        "resolved": "3.4.244",
+        "contentHash": "L+xHZiYgIvMEbHo1X49HxgfUhfh52/TWLOuUDsOP3OAY0QAn+W6SRNA5bvIRBQ4291SlTZUXPbCRPX8bn7H86Q=="
       },
       "Newtonsoft.Json": {
         "type": "Direct",
@@ -154,9 +154,9 @@
       },
       "System.IO.Abstractions": {
         "type": "Direct",
-        "requested": "[13.2.47, )",
-        "resolved": "13.2.47",
-        "contentHash": "t1hPTax+QnZscqwCY2Xuszm+qGm9qPDFvDPOjB31nR1XBtKDbt/RE5s0gBTOvQ9EP//jfrg2HEQUQyN5asFocg==",
+        "requested": "[14.0.3, )",
+        "resolved": "14.0.3",
+        "contentHash": "yWSlFXDNys8MaMAPVVkWiIDFJfcENXWEbxPykkh/WfG2mygh+c6mA6AHozLe2v0yElf2/SdlfrXUxLlDgD8SrQ==",
         "dependencies": {
           "System.IO.FileSystem.AccessControl": "5.0.0"
         }

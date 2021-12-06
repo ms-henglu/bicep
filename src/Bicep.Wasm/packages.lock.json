@@ -23,9 +23,9 @@
       },
       "Nerdbank.GitVersioning": {
         "type": "Direct",
-        "requested": "[3.4.231, )",
-        "resolved": "3.4.231",
-        "contentHash": "ifpSbv0sySgIVymTQQz0pjI6O7o/JxnIQMlj28JF5Ybr1LoUTcMfoKnAKwteRlhpQM9qJmONGy9M8BgrEcOteg=="
+        "requested": "[3.4.244, )",
+        "resolved": "3.4.244",
+        "contentHash": "L+xHZiYgIvMEbHo1X49HxgfUhfh52/TWLOuUDsOP3OAY0QAn+W6SRNA5bvIRBQ4291SlTZUXPbCRPX8bn7H86Q=="
       },
       "System.Net.Http.Json": {
         "type": "Direct",
@@ -365,8 +365,8 @@
       },
       "System.IO.Abstractions": {
         "type": "Transitive",
-        "resolved": "13.2.47",
-        "contentHash": "t1hPTax+QnZscqwCY2Xuszm+qGm9qPDFvDPOjB31nR1XBtKDbt/RE5s0gBTOvQ9EP//jfrg2HEQUQyN5asFocg==",
+        "resolved": "14.0.3",
+        "contentHash": "yWSlFXDNys8MaMAPVVkWiIDFJfcENXWEbxPykkh/WfG2mygh+c6mA6AHozLe2v0yElf2/SdlfrXUxLlDgD8SrQ==",
         "dependencies": {
           "System.IO.FileSystem.AccessControl": "5.0.0"
         }
@@ -471,7 +471,7 @@
           "Microsoft.Extensions.Configuration.Json": "6.0.0",
           "Newtonsoft.Json": "13.0.1",
           "System.Collections.Immutable": "6.0.0",
-          "System.IO.Abstractions": "13.2.47"
+          "System.IO.Abstractions": "14.0.3"
         }
       },
       "bicep.decompiler": {

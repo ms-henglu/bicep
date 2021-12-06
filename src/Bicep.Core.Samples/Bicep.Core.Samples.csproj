@@ -16,10 +16,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="FluentAssertions" Version="6.1.0" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.10.0" />
-    <PackageReference Include="MSTest.TestAdapter" Version="2.2.3" />
-    <PackageReference Include="MSTest.TestFramework" Version="2.2.5" />
+    <PackageReference Include="FluentAssertions" Version="6.2.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.0.0" />
+    <PackageReference Include="MSTest.TestAdapter" Version="2.2.8" />
+    <PackageReference Include="MSTest.TestFramework" Version="2.2.8" />
     <PackageReference Include="coverlet.collector" Version="3.1.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -30,5 +30,9 @@
     <ProjectReference Include="..\Bicep.Cli\Bicep.Cli.csproj" />
     <ProjectReference Include="..\Bicep.Core\Bicep.Core.csproj" />
     <ProjectReference Include="..\Bicep.Core.UnitTests\Bicep.Core.UnitTests.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Update="Nerdbank.GitVersioning" Version="3.4.244" />
   </ItemGroup>
 </Project>
